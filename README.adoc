@@ -18,8 +18,8 @@ Fist we need to set up a PostgreSQL instance:
 
 ```shell
 oc new-app --name postgresql \
-     --env POSTGRESQL_USER=admin \
-     --env POSTGRESQL_PASSWORD=admin \
+     --env POSTGRESQL_USER=my-db-user \
+     --env POSTGRESQL_PASSWORD=my-db-password \
      --env POSTGRESQL_DATABASE=sampledb \
      postgresql:latest
 ```
@@ -77,12 +77,12 @@ In the `deploy section` we hardcode environment variables to connect to the data
 == Using secrets setup
 
 === Adding our secret
-link:./postgres-db-secret.yaml[openshift-secret.yaml] contains a secret called `postgres-db-secret` with base64 encoded values of the most sensitive data needed to connect to our database. See https://github.com/jboss-eap-up-and-running/docs/blob/main/RUNNING_ON_OPENSHIFT.adoc#adding-a-secret-to-openshift[Adding a secret to OpenShift] for more information.
+link:./postgres-secret.yaml[postgres-secret.yaml] contains a secret called `postgres-secret` with base64 encoded values of the most sensitive data needed to connect to our database. See https://github.com/jboss-eap-up-and-running/docs/blob/main/RUNNING_ON_OPENSHIFT.adoc#adding-a-secret-to-openshift[Adding a secret to OpenShift] for more information.
 
 To add this secret, run:
 [source, yaml]
 ----
-oc apply -f postgres-db-secret.yaml
+oc apply -f postgres-secret.yaml
 ----
 
 === Deploying the 'using secrets' setup quickstart
@@ -123,7 +123,7 @@ We specify that we want to use the EAP datasources feature pack and provision th
 
 The `POSTGRESQL_DRIVER_VERSION` environment variable sets the version of the PostgreSQL driver as explained in https://github.com/jboss-eap-up-and-running/docs/blob/main/RUNNING_ON_OPENSHIFT.adoc#_setting_environment_variables[Setting environment variables].
 
-In the `deploy section` we hardcode environment variables to connect to the database. The `postgresql-datasource` results in a PostgreSQL datasource being added to the server configuration. This datasource configuration, in turn, contains expressions that can be resolved from the listed environment variables. The environment variables `POSTGRESQL_DATABASE`, `POSTGRESQL_USER` and `POSTGRESQL_PASSWORD` are set from entries in the `postgres-db-secret` secret we created earlier. See https://github.com/jboss-eap-up-and-running/docs/blob/main/RUNNING_ON_OPENSHIFT.adoc#_mapping_individual_values_from_a_configmapsecret_to_environment_variables[Mapping individual values from a ConfigMap/Secret to environment variables] for more details.
+In the `deploy section` we hardcode environment variables to connect to the database. The `postgresql-datasource` layer results in a PostgreSQL datasource being added to the server configuration. This datasource configuration, in turn, contains expressions that can be resolved from the listed environment variables. The environment variables `POSTGRESQL_DATABASE`, `POSTGRESQL_USER` and `POSTGRESQL_PASSWORD` are set from entries in the `postgres-secret` secret we created earlier. See https://github.com/jboss-eap-up-and-running/docs/blob/main/RUNNING_ON_OPENSHIFT.adoc#_mapping_individual_values_from_a_configmapsecret_to_environment_variables[Mapping individual values from a ConfigMap/Secret to environment variables] for more details.
 
 == Deleting the database
 
@@ -138,5 +138,5 @@ oc delete service postgresql
 To delete the secret (for the 'using secrets' flavour of this quickstart):
 [source,shell]
 ----
-oc delete secret postgres-db-secret
+oc delete secret postgres-secret
 ----

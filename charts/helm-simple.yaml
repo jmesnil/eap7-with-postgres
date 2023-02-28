@@ -1,5 +1,3 @@
-# This configuration file can be used to build and deploy the todo-backend
-# quickstart on OpenShift with the Helm Chart for EAP.
 build:
   uri: https://github.com/jboss-eap-up-and-running/eap7-with-postgres
   s2i:
@@ -17,10 +15,10 @@ deploy:
     - name: POSTGRESQL_DATABASE
       value: sampledb
     - name: POSTGRESQL_USER
-      value: admin
+      value: my-db-user
     - name: POSTGRESQL_PASSWORD
-      value: admin
-    - name: POSTGRESQL_DATASOURCE
-      value: qs-ds
+      value: my-db-password
     - name: POSTGRESQL_SERVICE_HOST
       value: postgresql
+    - name: POSTGRESQL_DATASOURCE
+      value: qs-ds
