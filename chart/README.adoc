@@ -1,0 +1,35 @@
+# Generate an Helm chart for the application
+
+* Due to a [bug](https://github.com/openshift-helm-charts/charts/issues/773) in Red Hat OpenShift Helm registry, the process to generate the Helm chart for the application needs to be edited:
+
+* in `Chart.yaml`, edit the name of the 3 dependencies:
+
+```
+- name: redhat-eap74
+  ...
+- name: redhat-postgresql-imagestreams
+  ...
+- name: redhat-postgresql-persistent
+  ...
+```
+
+* Run `helm dep up`
+* Revert the change in `Chart.yaml` to remove the `redhat-` prefix:
+
+```
+- name: eap74
+  ...
+- name: postgresql-imagestreams
+  ...
+- name: postgresql-persistent
+  ...
+```
+
+* Run `helm package .`
+
+At this point, the generated archive can be used to install the whole application:
+
+```
+helm install eap7-with-postgres eap7-with-postgresql-1.0.0.tgz
+```
+
