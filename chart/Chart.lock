@@ -1,12 +1,6 @@
 dependencies:
-- name: redhat-eap74
-  repository: https://charts.openshift.io
+- name: eap74
+  repository: https://jbossas.github.io/eap-charts/
   version: 1.1.1
-- name: redhat-postgresql-imagestreams
-  repository: https://charts.openshift.io
-  version: 0.0.1
-- name: redhat-postgresql-persistent
-  repository: https://charts.openshift.io
-  version: 0.0.2
-digest: sha256:0606c84736b8c5a2b3b4af9b3f4a728280ea937ac5e11ea13ce0489e8ab66ebb
-generated: "2023-04-26T10:02:42.768273+02:00"
+digest: sha256:ebb900ede95f3c0d3f27a78d89a7a784b6c40d4ca5b74b32e57e1133701be8b5
+generated: "2023-04-26T10:24:02.078762+02:00"

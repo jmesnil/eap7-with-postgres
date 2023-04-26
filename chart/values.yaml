@@ -1,10 +1,7 @@
-postgresql-persistent:
-  database_service_name: postgres-db
-  namespace: jmesnil1-dev
-  config:
-    postgresql_database: testdb
-    postgresql_password: testp
-    postgresql_user: testu
+database:
+  name: sampledb
+  user: "my-user"
+  password: "my-password"
 eap74:
   build:
     uri: https://github.com/jboss-eap-up-and-running/eap7-with-postgres
@@ -24,18 +21,18 @@ eap74:
         valueFrom:
           secretKeyRef:
             key: database-name
-            name: postgres-db
+            name: postgresql
       - name: POSTGRESQL_USER
         valueFrom:
           secretKeyRef:
             key: database-user
-            name: postgres-db
+            name: postgresql
       - name: POSTGRESQL_PASSWORD
         valueFrom:
           secretKeyRef:
             key: database-password
-            name: postgres-db
+            name: postgresql
       - name: POSTGRESQL_DATASOURCE
         value: qs-ds
       - name: POSTGRESQL_SERVICE_HOST
-        value: postgres-db
+        value: postgresql
