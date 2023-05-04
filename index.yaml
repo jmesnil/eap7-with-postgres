@@ -1,0 +1,17 @@
+apiVersion: v1
+entries:
+  eap7-with-postgresql:
+  - apiVersion: v2
+    created: "2023-05-04T09:25:15.510813+02:00"
+    dependencies:
+    - name: eap74
+      repository: https://jbossas.github.io/eap-charts/
+      version: 1.1.1
+    description: Build and deploy JBoss EAP 7.4 + PostgreSQL applications on OpenShift
+    digest: 4e38c0af0a9d1183be3dc03ec5138b6b31ea177c5bf954ad031da1a91affb10e
+    name: eap7-with-postgresql
+    type: application
+    urls:
+    - eap7-with-postgresql-1.0.0.tgz
+    version: 1.0.0
+generated: "2023-05-04T09:25:15.509333+02:00"
